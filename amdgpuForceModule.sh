@@ -20,4 +20,6 @@
 ################################################################################
 #	NOTE: this script must be run with super-user privilege.
 ################################################################################
-sudo echo -e "# Custom module configuration to force the amdgpu kernel driver\n# Note: only amdgpu supports Vulkan\noptions radeon cik_support=0\noptions amdgpu cik_support=1" > /etc/modprobe.d/amdgpu.conf
+sudo echo -e "# Custom module configuration to force the amdgpu kernel driver\n\
+	# Note: only amdgpu supports Vulkan\noptions radeon cik_support=0\n\
+	options amdgpu cik_support=1" > /etc/modprobe.d/amdgpu.conf
