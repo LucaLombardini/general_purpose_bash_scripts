@@ -30,8 +30,10 @@ function padder {
 
 for battery in $(ls /sys/class/power_supply | grep BAT); do
 	echo -e "Battery: $battery"
-	echo -e "\tAlarm code (0: no critical issues): $(cat /sys/class/power_supply/$battery/alarm)"
-	echo -e "\tCapacity level (should be [Normal]): $(cat /sys/class/power_supply/$battery/capacity_level)"	
+	echo -e "\tAlarm code (0: no critical issues): $(cat \
+		/sys/class/power_supply/$battery/alarm)"
+	echo -e "\tCapacity level (should be [Normal]): $(cat \
+		/sys/class/power_supply/$battery/capacity_level)"	
 	CAP_INI=$(cat /sys/class/power_supply/$battery/energy_full_design) #uW
 	CAP_INI_INT=$((CAP_INI/1000000))
 	CAP_INI_DEC=$((CAP_INI/1000 - 1000*CAP_INI_INT))
@@ -43,18 +45,25 @@ for battery in $(ls /sys/class/power_supply | grep BAT); do
 	RES_CAP=$((CAP_ACT*10000/CAP_INI))
 	RES_CAP_INT=$((RES_CAP/100))
 	RES_CAP_DEC=$((RES_CAP - 100*RES_CAP_INT))
-	echo -e "\tRelative energy capacity: $RES_CAP_INT.$(padder $RES_CAP_DEC) %"
+	echo -e "\tRelative energy capacity: $RES_CAP_INT.$(padder \
+		$RES_CAP_DEC) %"
 	LOSS_CAP=$((10000 - RES_CAP))
 	LOSS_CAP_INT=$((LOSS_CAP/100))
 	LOSS_CAP_DEC=$((LOSS_CAP - 100*LOSS_CAP_INT))
-	echo -e "\tRelative capacity lost: $LOSS_CAP_INT.$(padder $LOSS_CAP_DEC) %"
-	EN_NOW=$(cat /sys/class/power_supply/BAT0/energy_now)
+	echo -e "\tRelative capacity lost: $LOSS_CAP_INT.$(padder \
+		$LOSS_CAP_DEC) %"
+	EN_NOW=$(cat /sys/class/power_supply/$battery/energy_now)
 	EN_NOW_INT=$((EN_NOW/1000000))
 	EN_NOW_DEC=$((EN_NOW/1000 - 1000*EN_NOW_INT))
 	echo -e "\tReal-time stored energy: $EN_NOW_INT.$EN_NOW_DEC Wh"
-	echo -e "\tActual percentage: $(cat /sys/class/power_supply/BAT0/capacity)"
-	echo -e "\tBattery status: $(cat /sys/class/power_supply/$battery/status)"
-	echo -e "\tBattery technology: $(cat /sys/class/power_supply/$battery/technology)"
-	echo -e "\tMinimum design voltage: $(awk '{print $1*10^-6 " V"}' /sys/class/power_supply/$battery/voltage_min_design)"
-	echo -e "\tReal-time voltage: $(awk '{print $1*10^-6 " V"}' /sys/class/power_supply/$battery/voltage_now)"
+	echo -e "\tActual percentage: $(cat \
+		/sys/class/power_supply/$battery/capacity)"
+	echo -e "\tBattery status: $(cat \
+		/sys/class/power_supply/$battery/status)"
+	echo -e "\tBattery technology: $(cat \
+		/sys/class/power_supply/$battery/technology)"
+	echo -e "\tMinimum design voltage: $(awk '{print $1*10^-6 " V"}' \
+		/sys/class/power_supply/$battery/voltage_min_design)"
+	echo -e "\tReal-time voltage: $(awk '{print $1*10^-6 " V"}' \
+		/sys/class/power_supply/$battery/voltage_now)"
 done
