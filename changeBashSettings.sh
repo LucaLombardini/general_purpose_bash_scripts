@@ -14,7 +14,7 @@ if [ -e ~/.git-prompt.sh ]; then
         # universal terminals
         # PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[35m\]$(__git_ps1 " [ ⌥  %s ]")\[\033[00m\]\$ '
         # 256 color terminals only -> in future i'll add something to automatize
-        PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w$(__git_ps1 "\[\033[38;5;162m\] [ \\u2325  %s ]\[\033[00m\]")\[\033[00m\]\$ '
+	PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w$(__git_ps1 "\[\033[00m\]:\[\033[38;5;162m\][ ⌥  %s ]\[\033[00m\]")\[\033[00m\]\$ '
 fi
 EOF
 

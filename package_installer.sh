@@ -1,0 +1,1 @@
+sudo apt install -y wine-stable wine64 wine32 winetricks build-essential manpages-it manpages-dev manpages-posix jq lm-sensors locate lynx exfat-utils exfat-fuse net-tools git tree flex bison libncurses-dev ncurses-devel gcc-arm-linux-gnueabihf qemu qemu-system-x86 qemu-system-arm git-all curl 
